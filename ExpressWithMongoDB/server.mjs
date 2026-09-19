@@ -43,6 +43,36 @@ app.get("/getById/:id", async(req,res)=>{
   }
 })
 
+// Update
+// http://localhost:3000/update/:id
+
+app.put("/update/:id", async(req,res)=>{
+  try {
+    const id = req.params.id
+    const result = await database.collection("Posts").findOneAndUpdate({_id: new ObjectId(id)}, {$set: req.body})
+    res.send({message: "Post Updated Successfully"})
+  } catch (error) {
+    res.send({ErrorMessage: error.message})
+  }
+})
+
+//Delete
+
+app.delete("/delete/:id", async(req,res)=>{
+  try {
+   const id = req.params.id
+   const result = await database.collection("Posts").findOneAndDelete({_id: new ObjectId(id)}) 
+   if(result){
+      res.send({message: "Post Deleted Successfully"})
+   }else{
+    res.send({message: "Could not found..."})
+   }
+  } catch (error) {
+    res.send({ErrorMessage: error.message})
+  }
+})
+
+
 
 
 
