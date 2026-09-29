@@ -1,9 +1,11 @@
 import express from 'express';
 import { main } from './Connection/Connection.mjs';
+import myroutes from './Routes/routes.mjs';
 
 const app = express();
 const port = 3000;
-
+app.use(express.json())
+app.use("/api", myroutes)
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
