@@ -10,6 +10,9 @@ app.use("/project",myroutes)
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+app.get('/test', (req, res) => {
+  res.send('This is testing route');
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
