@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import './Register.css'
+import { Link } from 'react-router'
 const Register = () => {
     const form = useForm()
     const { register, handleSubmit, control, formState: { errors } } = form
@@ -74,7 +75,7 @@ const Register = () => {
                     <span style={{ "fontSize": "8", "color": "red", "marginTop": "0" }}>{errors.password?.message}</span>
                     <br/>
                     <button className="btn" type="submit">SignUp</button>
-                    <p className="btn-link">Already have an account?<a href="#" style={{ "color": "#ffeba7" }}>Login</a></p>
+                    <p className="btn-link">Already have an account?<Link to={"/login"} style={{ "color": "#ffeba7" }}>Login</Link></p>
                 </form>
             </div>
         </div>

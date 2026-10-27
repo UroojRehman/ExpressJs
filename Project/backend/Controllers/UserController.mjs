@@ -33,16 +33,16 @@ export const login = async(req,res)=>{
         const {email,password} = req.body;
         const login = await User.findOne({email:email})
         if(!login){
-            res.send({message: "Email doesnot exist..."})
+            res.send({message: "Email doesnot exist...", "status":0})
         }else{
        const token = jwt.sign({userId : login._id},SECRET_KEY,{expiresIn: "1hr"})
        const uname = login.name
        const expiresAt = new Date(Date.now()+(60*60*1000))
        const pwd = await bcrypt.compare(password, login.password);
        if(pwd){
-        res.send({message: "Login Successfully"})
+        res.send({message: "Login Successfully", "status":1, token, "UserName":uname})
        }else{
-        res.send({message: "Invalid Password"})
+        res.send({message: "Invalid Password", "status":0})
        }
         }
     } catch (error) {
