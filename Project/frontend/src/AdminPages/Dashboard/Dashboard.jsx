@@ -1,9 +1,17 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const Logout =()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("User Name")
+    navigate("/login")
+  }
   return (
     <div>
       <h1>Admin Dashboard</h1>
+      <button className='btn btn-danger' onClick={Logout}>Logout</button>
     </div>
   )
 }

@@ -15,7 +15,8 @@ export const signup = async(req,res)=>{
             const newUser = new User({
                 name:name,
                 email:email,
-                password: bcrypt.hashSync(password, 10)
+                password: bcrypt.hashSync(password, 10),
+                role: "user"
             })
 
             await newUser.save()
@@ -40,7 +41,7 @@ export const login = async(req,res)=>{
        const expiresAt = new Date(Date.now()+(60*60*1000))
        const pwd = await bcrypt.compare(password, login.password);
        if(pwd){
-        res.send({message: "Login Successfully", "status":1, token, "UserName":uname})
+        res.send({message: "Login Successfully", "status":1, token, "UserName":uname, "role":login.role})
        }else{
         res.send({message: "Invalid Password", "status":0})
        }

@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const username = localStorage.getItem("User Name")
+    const Logout =()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("User Name")
+    navigate("/login")
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,10 +39,12 @@ const Navbar = () => {
         <li className="nav-item">
           <Link className="nav-link " href="#" tabindex="-1">Disabled</Link>
         </li>
-
-          <li className="nav-item">
+         {username?  <li className="nav-item">
+          <Link className="btn btn-danger" tabindex="-1" onClick={Logout}>Logout</Link>
+        </li> :  <li className="nav-item">
           <Link className="nav-link " to={"/register"} tabindex="-1" >Get Started</Link>
-        </li>
+        </li>}
+         
       </ul>
       {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

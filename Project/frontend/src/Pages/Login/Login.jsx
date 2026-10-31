@@ -14,14 +14,22 @@ const Login = () => {
             const result = await axios.post("http://localhost:3000/project/login", data)
             console.log(result)
             if (result.data.status === 1) {
+                if (result.data.role == "admin") {
+                    localStorage.setItem("token", result.data.token)
+                    localStorage.setItem("User Name", result.data.UserName)
+                    alert(result.data.message)
+                    navigate("/dashboard")
+                }else{
                 localStorage.setItem("token", result.data.token)
                 localStorage.setItem("User Name", result.data.UserName)
                 alert(result.data.message)
                 navigate("/")
+                }
+
 
 
             } else {
-                 alert(result.data.message)
+                alert(result.data.message)
                 navigate("/login")
             }
         } catch (error) {
